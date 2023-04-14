@@ -25,9 +25,12 @@ const saveData = () => {
 };
 saveData();
 
-formEl.addEventListener(`submit`, event => {
+function submitData(event) {
+  const data = JSON.parse(localStorage.getItem(savedEls));
+  console.log(`email: ${data.email} message: ${data.message}`);
   event.preventDefault();
+  event.currentTarget.reset();
   localStorage.removeItem(savedEls);
-  emailEl.value = ``;
-  messageEl.value = ``;
-});
+}
+
+formEl.addEventListener(`submit`, submitData);
